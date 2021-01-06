@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Map</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body{
+          margin: 0;
+          padding: 0;
+      }
+
+      #map {
+          height:600px;
+          width:100%;
+      }
+    </style>
+    
+</head>
+<body>
+    <h1>Search Location</h1>
+    <!--The div element for the map -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css"/>
+    <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <div id="map"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYm9uZWxlc3MiLCJhIjoiY2tqZG1oeGE4NTEzNDJ4bTA0Y3BtOWt3MSJ9.g4Et-fE8szzj54M34F3vmg';
+
+        var map = new mapboxgl.Map({
+            container: 'map', // HTML container id
+            style: 'mapbox://styles/mapbox/streets-v10', // style URL
+            center: {lat:1.3521, lng:103.8198}, // starting position as [lng, lat]
+            zoom: 10
+        });
+
+        map.addControl(
+        new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+            })
+        );
+
+        var geojson = {
+            type: 'FeatureCollection',
+            features: [{
+                type: 'Feature',
+                geometry: {
+                type: 'Point',
+                coordinates: {lat:1.3521, lng:103.8198}
+                },
+                properties: {
+                title: 'Mapbox',
+                description: 'Washington, D.C.'
+                }
+            },
+            {
+                type: 'Feature',
+                geometry: {
+                type: 'Point',
+                coordinates: {lat:1.3521, lng:103.8198}
+                },
+                properties: {
+                title: 'Mapbox',
+                description: 'San Francisco, California'
+                }
+            }]
+        };
+        
+    </script>
+</body>
+</html>
