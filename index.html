@@ -1,12 +1,109 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <script src="script.js"></script>
-  </body>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Home</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+
+
+.box{
+    position: relative;
+    height: 170px;
+    width: 170px; 
+    border-radius: 30px 0px 30px 0px;
+    border-color: black;
+    border-style: solid;
+    border-width: thin;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    margin: 50px auto;
+    box-shadow: 2px 5px 10px;
+}
+
+.column{
+    display: inline-block;
+    padding: 10px;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    background: blue;
+    color: white;
+    font-size: 30px;
+}
+
+</style> 
+</head>
+<body>
+<div class="header">
+    <h1>Location Searcher</h1>
+</div>
+
+<div class="column">
+    <img src="" id="icon">
+</div>
+<div class="column">
+    <h6><span id="temp"></span></h6>
+</div>
+<div class="column">
+    <h6 id="weather"></h6>
+</div>
+
+<nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <a href="map.html">
+                    <div class="box">
+                        <img src="map icon.png" width="140px" height="140px">
+                        <div style="margin: 20px; font-size: 25px; color: black;">Map</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <a href="directions.html">
+                    <div class='box'>
+                        <img src="directions.png" width="140px" height="140px">
+                        <div style="margin: 20px; font-size: 25px; color: black;">Directions</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <a href="Carpark.html">
+                    <div class='box'>
+                        <img src="parking.png" width="140px" height="140px">
+                        <div style="margin: 20px; font-size: 25px; color: black;">Carpark locator</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+</body>
+<script type="text/javascript">
+    link = "http://api.openweathermap.org/data/2.5/weather?q=Singapore&units=metric&appid=deec4bc563af1bb285021b6e7c5714ef";
+    var request = new XMLHttpRequest();
+    request.open('GET',link,true);
+    request.onload = function(){
+        var obj = JSON.parse(this.response)
+        console.log(obj);
+        document.getElementById('weather').innerHTML = obj.weather[0].description;
+        document.getElementById('temp').innerHTML = obj.main.temp;
+        document.getElementById('icon').src = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+    }
+    if(request.status=200){
+        console.log("ERROR");
+    }
+    request.send();
+  </script>
 </html>
